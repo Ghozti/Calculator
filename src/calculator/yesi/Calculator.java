@@ -113,39 +113,58 @@ public class Calculator {
      */
 
     public void quadratic(){
-        double QB;
-        double QA;
-        double QC;
+        double IB;
+        double IA;
+        double IC;
+        // "I" stands for initial variables. These are the float variables that the user stores.
 
         System.out.println("Function: Quadratic Formula.");
 
         System.out.println("Enter a Value for: B");
-        var nB = new Scanner(System.in);
-        QB = nB.nextDouble();
+        var sB = new Scanner(System.in);
+        IB = sB.nextDouble();
 
         System.out.println("Enter a value for: A");
         var nA = new Scanner(System.in);
-        QA = nA.nextDouble();
+        IA = nA.nextDouble();
 
         System.out.println("Enter a value for: C");
         var nC = new Scanner(System.in);
-        QC = nC.nextDouble();
+        IC = nC.nextDouble();
 
-        double F = QB * QB;
-        double FF = 4 * (QA * QC);
+        double F = IB * IB;
+        double FF = 4 * (IA * IC);
         double FFF = F - FF;
+        //The "f" variables store the values when the program is simplifying the equation.
+        /*
+        * "F" stores the value of b when it is squared
+        * "FF" stores the value when you multiply "A" by "C" and then multiply that by 4
+        * "FFF" stores the value when you subtract F and FF or (B^2) - 4 * (A * C)
+        * These 3 doubles only solve for part of the top equation (b^2 - 4ac)
+         */
 
         double finalF = Math.sqrt(FFF);
+        // "finalF" stores the value of "FFF" when it is square rooted
 
-        double bottomPart = 2 * QA;
+        double bottomPart = 2 * IA;
+        // "bottomPart" solves for the bottom part of the equation (2a)
 
-        double AAA = -QB + finalF;
-        double negativeAAA = -QB - finalF;
+        double AAA = -IB + finalF;
+        //"AAA" solves for the rest of the equation (-b + *the result of the 2 equations subtracted then square rooted*)
+
+        double altAAA = -IB - finalF;
+        //"negativeAAA" solves for the other solution which does the same thing as the line of code shown above except subtracts rather than add
 
         double finalAnswer = AAA/bottomPart;
-        double finalAnswer1 = negativeAAA/bottomPart;
+        //gets the first answer of the problem
+
+        double finalAnswer1 = altAAA/bottomPart;
+        //gets the second answer of the problem
+
+        //both of the lines shown above take "AAA" and "altAAA" and divide it by 2
 
         System.out.println("The First answer is : X = " + finalAnswer);
         System.out.println("The Second answer is : X = " + finalAnswer1);
+        //prints out the final results of the equation.
     }
 }
