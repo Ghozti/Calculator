@@ -7,7 +7,7 @@ public class Calculator {
     static double B;
     //declares the 2 doubles that will be used to store the inputs of the user.
 
-    public static void inputs(){
+    public void inputs(){
         var a = new Scanner(System.in);
         A = a.nextDouble();
         var b = new Scanner(System.in);
@@ -22,7 +22,10 @@ public class Calculator {
                 "[3] divide\n" +
                 "[4] multiply\n" +
                 "[5] square root\n" +
-                "[6] quadratic");
+                "[6] quadratic\n" +
+                "[7] slope\n" +
+                "[8] convert imperial to metric\n" +
+                "[9] convert metric to imperial");
 
         var choices = new Scanner(System.in);
         int choice = choices.nextInt();
@@ -46,12 +49,20 @@ public class Calculator {
             case 6:
                 quadratic();
                     break;
+            case 7:
+                slope();
+                    break;
+            case 8:
+                imperialToMetric();
+                    break;
+            case 9:
+                metricToImperial();
+                    break;
         }
     }
     /* the start method bring a menu of choices the user can choose from
      * it also bring the user's choice and allows the program to determine what function to run depending on the user's choice
      */
-
 
     /*
     *** FOR EVERY BASIC MATHEMATICAL FUNCTION:***
@@ -153,7 +164,7 @@ public class Calculator {
         //"AAA" solves for the rest of the equation (-b + *the result of the 2 equations subtracted then square rooted*)
 
         double altAAA = -IB - finalF;
-        //"negativeAAA" solves for the other solution which does the same thing as the line of code shown above except subtracts rather than add
+        //"altAAA" solves for the other solution which does the same thing as the line of code shown above except subtracts rather than add
 
         double finalAnswer = AAA/bottomPart;
         //gets the first answer of the problem
@@ -161,10 +172,148 @@ public class Calculator {
         double finalAnswer1 = altAAA/bottomPart;
         //gets the second answer of the problem
 
-        //both of the lines shown above take "AAA" and "altAAA" and divide it by 2
+        //both of the lines shown above take "AAA" and "altAAA" and divide it by the bottom part
 
         System.out.println("The First answer is : X = " + finalAnswer);
         System.out.println("The Second answer is : X = " + finalAnswer1);
         //prints out the final results of the equation.
+    }
+
+    public void slope(){
+        double x1;
+        double x2;
+        // declares the x values
+
+        double y1;
+        double y2;
+        // declares the y values
+
+        System.out.println("Enter a value for Y2");
+        var scannerY2 = new Scanner(System.in);
+        y2 = scannerY2.nextDouble();
+
+        System.out.println("Enter a value for Y1");
+        var scannerY1 = new Scanner(System.in);
+        y1 = scannerY1.nextDouble();
+
+        System.out.println("Enter a value for X2");
+        var scannerX2 =  new Scanner(System.in);
+        x2 = scannerX2.nextDouble();
+
+        System.out.println("Enter a value for X1");
+        var scannerX1 = new Scanner(System.in);
+        x1 = scannerX1.nextDouble();
+
+        /*
+        * the following blocks of code allow the user to input values for x1, x2, y1 and y2.
+        * Then it stores those values into doubles stated all the way on top of the method
+         */
+
+        double finalTop = y2 - y1;
+        double finalBottom = x2 - x1;
+        /*
+         * the following lines of code take the values of y and x 2 and 1 and subtracts them
+         */
+
+        double vFinal = finalTop/finalBottom;
+        //the following line divides the values stored in "finalTop" and "finalBottom"
+
+        System.out.println("Slope = " + vFinal);
+        // the following prints out the final result.
+    }
+
+    public void imperialToMetric(){
+        int [] choice = new int[4];
+        choice[1] = 1;
+        choice[2] = 2;
+        choice[3] = 3;
+        // declares an array list that wil be used to choose between the menu
+
+        System.out.println("What do you wish to convert to metric?");
+        System.out.println(
+                "[1] inch(es) to centimeter(s)\n" +
+                "[2] foot/feet to meter(s)\n" +
+                "[3] mile(s) to kilometer(s)\n");
+        //provides the user a menu of choices of which the user can choose from
+
+        var scanner = new Scanner(System.in);
+        int c = scanner.nextInt();
+        // provides a scanner so the user can choose
+
+        if (c == choice[1]){
+            System.out.println("Enter value of inches you wish to convert");
+            var i_scanner = new Scanner(System.in);
+            double inches = i_scanner.nextDouble();
+            double resultI = inches * 2.54;
+            System.out.println("The conversion is: " + inches + " Inches " + "Is equal to: " + resultI + " Centimeters");
+        }
+        if (c == choice[2]){
+            System.out.println("Enter the value of feet/foot you wish to convert");
+            var f_scanner = new Scanner(System.in);
+            double feet = f_scanner.nextDouble();
+            double resultF = feet/3.281;
+            System.out.println("The conversion is: " + feet + " feet " + "Is equal to: " + resultF + " Meters");
+        }
+        if (c == choice[3]){
+            System.out.println("Enter the value of miles you want to convert");
+            var m_scanner =  new Scanner(System.in);
+            double miles = m_scanner.nextDouble();
+            double resultM = miles * 1.609;
+            System.out.println("The conversion is: " + miles + " miles " + "Is equal to: " + resultM + " Kilometers");
+        }
+        /*
+        *these if statements follow the same format but with different results and attributes
+        * they are activated when the user's input matches the choice options (choice[1-3])
+        * the statement creates a new scanner for the user to give a value for inches, feet or miles.
+        * choice 1 takes the user's input which is stored as an inch(es) value then multiplies it by 2.54 to get the metric conversion (cm)
+        * choice 2 does the same but instead of multiplying it divides the input by 3.281 to get the conversion
+        * choice 3 is the same but it multiplies the input by 1.609.
+         */
+    }
+
+    public void metricToImperial(){
+        int [] choice = new int[4];
+        choice[1] = 1;
+        choice[2] = 2;
+        choice[3] = 3;
+        // presents an array to declare the number of options available
+
+        System.out.println("What do you wish to convert to imperial?");
+        System.out.println(
+                "[1] centimeter(s) to inch(es)\n" +
+                "[2] meter(s) to feet/foot\n" +
+                "[3] kilometer(s) to mile(s)\n");
+        //outputs a menu for the user to choose from
+
+        var scanner = new Scanner(System.in);
+        int i = scanner.nextInt();
+        //the scanner used to get the user's input ad the variable used to store that input
+
+        if (i == choice[1]){
+            System.out.println("Enter the value of centimeter(s) to convert");
+            var c_scanner = new Scanner(System.in);
+            double cm = c_scanner.nextDouble();
+            double in = cm/2.54;
+            System.out.println("The conversion is: " + cm + " centimeters " + "Is equal to: " + in + "Inches");
+        }
+        if (i == choice[2]){
+            System.out.println("Enter the value of meter(s) to convert");
+            var m_scanner = new Scanner(System.in);
+            double mt = m_scanner.nextDouble();
+            double ft = mt * 3.281;
+            System.out.println("The conversion is: " + mt + " meters " + "Is equal to: " + ft + "Feet/foot");
+        }
+        if (i == choice[3]){
+            System.out.println("Enter the value of kilometer(s) to convert");
+            var k_scanner = new Scanner(System.in);
+            double km = k_scanner.nextDouble();
+            double ml = km/1.609;
+            System.out.println("The conversion is: " + km + " meters " + "Is equal to: " + ml + "Mile(s)");
+        }
+        /*
+        *these statements work the same way as the ones from imperialToMetric() but inverts the equation to get the measurement in imperial.
+        * the statements also follow the same format
+        * if you are lost...read the damn comment below the imperial to metric method regarding the if statements and stop bing too lazy to read
+         */
     }
 }
